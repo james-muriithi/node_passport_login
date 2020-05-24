@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path')
+const path = require('path');
+const exphbs = require('express-handlebars');
 
 const app = express();
 
@@ -12,7 +13,16 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars');
 
 // static folder
-app.use(expresss.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// signup
+app.get('/signup', (req, res) => {
+    res.render('signup');
+});
+
+app.get('/', (req, res) => {
+    res.render('login');
+});
 
 
 const port = process.env.PORT || 3232;
