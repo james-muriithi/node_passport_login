@@ -499,6 +499,43 @@ input.input100 {
 }
 
 
+/*//////////////////////////////////////////////////////////////////
+[ Social item ]*/
+
+.bg1 {
+    background-color: #3b5998
+}
+
+.bg2 {
+    background-color: #1da1f2
+}
+
+.bg3 {
+    background-color: #ea4335
+}
+
+.login100-social-item {
+    font-size: 25px;
+    color: #fff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.login100-social-item:hover {
+    color: #fff;
+    background-color: #333333;
+}
+
+
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
