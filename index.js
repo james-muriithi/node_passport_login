@@ -8,8 +8,10 @@ const passport = require('passport')
 
 const app = express();
 
-// Passport Config
-require('./config/passport')(passport)
+// Passport local Config
+require('./config/passport')(passport);
+// Passport twitter Config
+require('./config/passport-twitter-init')(passport)
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars');
@@ -71,7 +73,11 @@ app.use((req, res, next) => {
 // static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+// auth route
+const authRoute = require('./routes/auth');
+app.use('/auth', authRoute);
 
+// index route
 const userRoute = require('./routes/user');
 app.use('/', userRoute);
 
