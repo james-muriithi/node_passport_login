@@ -4,8 +4,12 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport')
 
 const app = express();
+
+// Passport Config
+require('./config/passport')(passport)
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars');
@@ -13,7 +17,7 @@ app.set('view engine', 'handlebars');
 
 // register a helper
 exphbs.create({}).handlebars.registerHelper('if_not_empty', function(a, opts) {
-    if (!a) {
+    if (a.length > 0) {
         return opts.fn(this)
     } else {
         return opts.inverse(this)
@@ -25,21 +29,39 @@ exphbs.create({}).handlebars.registerHelper('if_not_empty', function(a, opts) {
 // body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Express session
+// Express 
+let sess = {
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        secure: false
+    }
+}
+
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1) // trust first proxy
+    sess.cookie.secure = true // serve secure cookies
+}
+
+app.use(session(sess))
 app.use(
-    session({
-        secret: 'secret',
-        resave: true,
-        saveUninitialized: true
-    })
+    session(sess)
 );
+
 // connect flash
 app.use(flash())
+
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 
 // global variables
 app.use((req, res, next) => {
-    res.locals.success = req.flash('success');
+    res.locals.success = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
     next();

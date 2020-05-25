@@ -10,7 +10,7 @@ This is a user login and registration app using Node.js, Express, Passport, Mong
 ### Usage
 
 ```sh
-$ git clone 
+$ git clone https://github.com/james-muriithi/node_passport_login.git
 $ npm install
 ```
 

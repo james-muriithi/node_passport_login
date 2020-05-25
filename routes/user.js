@@ -3,8 +3,8 @@ const router = express.Router();
 const User = require('../models/User');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const bcrypt = require('bcrypt');
-
+const bcrypt = require('bcryptjs');
+const passport = require('passport')
 
 // signup
 router.get('/signup', (req, res) => {
@@ -77,8 +77,20 @@ router.post('/signup', (req, res) => {
 
 });
 
+
+// Login
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/dashboard',
+        failureRedirect: '/',
+        failureFlash: true
+    })(req, res, next);
+});
+
 router.get('/', (req, res) => {
     res.render('login');
 });
+
+
 
 module.exports = router
