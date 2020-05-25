@@ -6,8 +6,16 @@
                     Sign In
                 </span>
             </div>
+            {{#if_not_empty error}}
+            <div class="alert alert-danger alert-dismissible fade show fs-13 mt-3 mx-3" role="alert">
+                {{error}}
+                <button type="button" class="close fs-19" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {{/if_not_empty}}
 
-            <form class="login100-form validate-form p-b-30">
+            <form class="login100-form validate-form p-b-30" method="POST" action="/login">
                 <div class="wrap-input100 validate-input m-b-26" data-validate="Email is required">
                     <span class="label-input100">Email</span>
                     <input class="input100" type="email" name="email" placeholder="Enter email">

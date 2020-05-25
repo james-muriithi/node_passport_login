@@ -8,7 +8,7 @@
             </div>
 
             {{#if errors}}
-                <div class="alert alert-warning alert-dismissible fade show fs-13 mt-3 mx-3" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show fs-13 mt-3 mx-3" role="alert">
                     {{#each errors }}
                     <li>{{msg}}</li>
                     {{/each}}
@@ -46,9 +46,9 @@
                     <span class="focus-input100"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input m-b-18" data-validate="Confirm Password is required" value="{{repeat_password}}">
+                <div class="wrap-input100 validate-input m-b-18" data-validate="Confirm Password is required">
                     <span class="label-input100">Password</span>
-                    <input class="input100" type="password" name="repeat_password" placeholder="Repeat the password">
+                    <input class="input100" type="password" name="repeat_password" placeholder="Repeat the password" value="{{repeat_password}}">
                     <span class="focus-input100"></span>
                 </div>
 
