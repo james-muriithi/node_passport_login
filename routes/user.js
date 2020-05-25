@@ -4,7 +4,9 @@ const User = require('../models/User');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const bcrypt = require('bcryptjs');
-const passport = require('passport')
+const passport = require('passport');
+
+const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
 // signup
 router.get('/signup', (req, res) => {
@@ -81,16 +83,26 @@ router.post('/signup', (req, res) => {
 // Login
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/dashboard',
+        successRedirect: '/home',
         failureRedirect: '/',
         failureFlash: true
     })(req, res, next);
 });
 
-router.get('/', (req, res) => {
+router.get('/', forwardAuthenticated, (req, res) => {
     res.render('login');
 });
 
+router.get('/home', ensureAuthenticated, (req, res) => {
+    res.render('home', { user: req.user });
+});
 
+
+// Logout
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success', 'You are logged out');
+    res.redirect('/');
+});
 
 module.exports = router
