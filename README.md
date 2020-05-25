@@ -4,9 +4,13 @@ This is a user login and registration app using Node.js, Express, Passport, Mong
 
 ### Version: 1.0.0
 
+![](screenshot.png)
+
+
 ### Usage
 
 ```sh
+$ git clone 
 $ npm install
 ```
 
@@ -18,6 +22,5 @@ $ npm run dev
 # Visit http://localhost:3232
 ```
 
-### Postgre
-
-Open "config/keys.js" and add your MongoDB URI, local or Atlas
+### Postgres
+Open ".env" and add configuration
