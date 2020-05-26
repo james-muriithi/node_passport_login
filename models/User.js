@@ -10,6 +10,10 @@ const User = db.define('users', {
     },
     full_name: {
         type: Sequelize.STRING
+    },
+    twitterId: {
+        type: Sequelize.STRING,
+        allowNull: true
     }
 })
 
