@@ -13,6 +13,12 @@ require('./config/passport')(passport);
 // Passport twitter Config
 require('./config/passport-twitter-init')(passport)
 
+// Passport facebook Config
+require('./config/passport-facebook-init')(passport)
+
+// Passport google Config
+require('./config/passport-google-init')(passport)
+
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars');
 
